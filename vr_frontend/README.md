@@ -9,6 +9,17 @@ This project provides a minimal React template with a clean, modern UI and minim
 - **Fast**: Minimal dependencies for quick loading times
 - **Simple**: Easy to understand and modify
 
+## Environment Setup
+
+To connect to the backend API, set the correct API server URLs in a `.env` file:
+
+```
+REACT_APP_API_URL=https://<backend-domain>:<port>
+REACT_APP_WS_URL=wss://<backend-domain>:<port>
+```
+
+If running in Codespaces/Kavia cloud, copy `.env.example` to `.env` and fill in with the backend URL shown in your workspace info, *not* `localhost`. If this is not set, the frontend will default to using `http://localhost:8000` and fails when the backend is not deployed locally.
+
 ## Getting Started
 
 In the project directory, you can run:
