@@ -1,104 +1,165 @@
 /* CSS Variables for Theme Management */
 :root {
-  /* Light theme colors */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8f9fa;
-  --text-primary: #282c34;
-  --text-secondary: #61dafb;
-  --border-color: #e9ecef;
-  --button-bg: #007bff;
-  --button-text: #ffffff;
+  --accent: #C8381D;
+  --primary: #23272B;
+  --secondary: #BFA764;
+  --surface: #18191B;
+  --text: #EEEDEB;
+  --text-strong: #F5F5F5;
+  --text-disabled: #8C8574;
+  --border: #332D26;
+  --danger: #9c1717;
 }
 
 [data-theme="dark"] {
-  /* Dark theme colors */
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #282c34;
-  --text-primary: #ffffff;
-  --text-secondary: #61dafb;
-  --border-color: #404040;
-  --button-bg: #0056b3;
-  --button-text: #ffffff;
+  --bg-primary: var(--primary);
+  --bg-secondary: #120b0b;
+  --text-primary: var(--text-strong);
+  --text-secondary: var(--secondary);
+  --border-color: var(--border);
+  --button-bg: var(--accent);
+  --button-text: #FFF;
+}
+
+body, html {
+  min-height: 100vh;
+  background: var(--bg-primary, #181818);
+  color: var(--text-primary, #EEEDEB);
+  font-family: 'Nunito', 'Roboto', 'Arial', sans-serif;
+  letter-spacing: 0.03em;
 }
 
 .App {
   text-align: center;
+  min-height: 100vh;
   background-color: var(--bg-primary);
   color: var(--text-primary);
-  min-height: 100vh;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: var(--bg-secondary);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: var(--text-primary);
-  transition: background-color 0.3s ease;
+  min-width: 100vw;
+  transition: background-color 0.3s ease, color 0.3s;
   position: relative;
 }
 
-.App-link {
-  color: var(--text-secondary);
-  transition: color 0.3s ease;
+/* VR Panels: All UI elements as physical panels */
+.vr-panel {
+  box-shadow: 0 8px 44px 0 #000e  , 0 1px 10px -4px #442c130f;
+  border-radius: 17px;
+  backdrop-filter: blur(1.4px) brightness(0.98);
+  border: 2.5px solid var(--border);
+  margin: 0 auto 38px auto;
+  background: var(--surface, #18191B);
+  transition: border .24s, box-shadow .24s;
 }
 
-.theme-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: var(--button-bg);
-  color: var(--button-text);
+.vr-panel.vr-lobby, .vr-panel.vr-leaderboard {
+  min-width: 340px;
+  max-width: 396px;
+}
+
+.vr-panel.vr-table {
+  margin-top: 26px;
+}
+
+.vr-btn {
+  font-family: inherit;
+  font-size: 1.05em;
+  font-weight: bold;
+  letter-spacing: 0.04em;
+  padding: 10px 26px;
+  background: var(--accent);
+  color: #fff;
   border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
-  font-size: 14px;
-  font-weight: 600;
+  border-radius: 11px;
+  outline: none;
+  box-shadow: 0 2.5px 8px 0 #2c142c18;
+  margin: 4px 0;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background 0.19s, color 0.15s, transform 0.08s;
+}
+.vr-btn:active { transform: scale(0.98); }
+.vr-btn:disabled, .vr-btn[disabled] { background: #272727; color: #acacac; cursor: not-allowed; }
+
+.vr-panel.vr-auth input, .vr-panel.vr-auth .vr-btn {
+  font-size: 1.02em;
 }
 
-.theme-toggle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  opacity: 0.9;
+.vr-panel.vr-auth ::placeholder { color: #988b70; opacity:0.95 }
+
+.vr-panel.vr-profile code { font-family: monospace; font-size: 0.93em;}
+
+.vr-panel.vr-leaderboard table { width: 100%;  }
+.vr-panel.vr-leaderboard th { font-size: 1.02em; }
+.vr-panel.vr-leaderboard td { font-size: 1.01em; }
+.vr-panel.vr-leaderboard td, .vr-panel.vr-leaderboard th { padding: 5px 6px; }
+
+.vr-panel.vr-chat {
+  min-width: 250px;
+  max-width: 310px;
+  min-height: 170px;
+  max-height: 390px;
 }
 
-.theme-toggle:active {
-  transform: translateY(0);
+.vr-chat input[type="text"] {
+  background: #23272B;
+  color: var(--text-strong);
+  border: 1.5px solid var(--secondary);
+  border-radius: 6px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.vr-panel.vr-table {
+  background: radial-gradient(circle at 40% 35%, #39220f 75%, #23272B 100%);
+  animation: vrGrungeBGPulse 6s infinite alternate;
 }
 
-/* Responsive design for mobile */
-@media (max-width: 768px) {
-  .theme-toggle {
-    top: 10px;
-    right: 10px;
-    padding: 8px 16px;
-    font-size: 12px;
-  }
+/* 3D/animated gun barrel spin FX */
+.vr-spin-animation {
+  animation: vrBarrelSpin 1.0s cubic-bezier(0.36,1.3,0.33,1) forwards;
+}
+@keyframes vrBarrelSpin {
+  0% { transform: rotate(0deg);}
+  80% { transform: rotate(365deg);}
+  100% { transform: rotate(340deg);}
+}
+
+/* Animate player's turn (glow/pulse) */
+@keyframes vr-pulse {
+  from { box-shadow: 0 0 8px 0px #C8381D77;}
+  to { box-shadow: 0 0 32px 16px #c8381daa;}
+}
+
+.vr-avatar {
+  display: inline-block;
+  border-radius: 50%;
+  width: 38px; height: 38px;
+  background: var(--secondary);
+  border: 2.5px solid var(--secondary);
+  margin: 2px;
+  color: #19192F;
+  font-weight: 800;
+  box-shadow: 0 1.5px 4px #111d;
+  font-size: 18px; text-align: center;
+  line-height: 38px;
+}
+
+.vr-lobby-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+  cursor: pointer;
+}
+
+.vr-lobby-list li button {
+  min-width: 68px;
+}
+
+.vr-lobby-list li[disabled] {
+  opacity: 0.6;
+}
+
+::-webkit-scrollbar { width: 9px; background: #281d13;}
+::-webkit-scrollbar-thumb { background: #80734e; border-radius: 7px;}
+
+@keyframes vrGrungeBGPulse {
+  from { filter: brightness(1.06) blur(0.2px); }
+  to { filter: brightness(0.98) blur(2.2px);}
 }
